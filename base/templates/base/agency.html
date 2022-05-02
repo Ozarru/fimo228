@@ -1,0 +1,74 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<!-- hero section -->
+<!-- <div class="grid grid-cols-3">
+  <img
+    src="{% static 'images/cast.jpg' %}"
+    alt="carousel"
+    class="w-300 h-300 object-center object-cover group-hover:opacity-75 m-0"
+  />
+  <img
+    src="{% static 'images/brenda1.jpg' %}"
+    alt="carousel"
+    class="w-300 h-300 object-center object-cover group-hover:opacity-75 m-0"
+  />
+  <img
+    src="{% static 'images/brenda2.jpg' %}"
+    alt="carousel"
+    class="w-300 h-300 object-center object-cover group-hover:opacity-75 m-0"
+  />
+</div> -->
+
+<div class="p-24 w-full bg-black h-80 text-center text-white">
+  <h1 class="text-7xl font-extrabold">Challenge Modelling</h1>
+  <p class="text-xl text-gray-300">Agency</p>
+</div>
+<!------------------------- intro --------------------------------------------------------------->
+<div class="items-center mx-auto text-right justify-center max-w-7xl">
+  <div class="grid grid-cols-3">
+    <img
+      src="{% static 'images/cast.jpg' %}"
+      alt="carousel"
+      class="w-300 h-300 object-center object-cover group-hover:opacity-75 m-0"
+    />
+    <img
+      src="{% static 'images/brenda1.jpg' %}"
+      alt="carousel"
+      class="w-300 h-300 object-center object-cover group-hover:opacity-75 m-0"
+    />
+    <img
+      src="{% static 'images/brenda2.jpg' %}"
+      alt="carousel"
+      class="w-300 h-300 object-center object-cover group-hover:opacity-75 m-0"
+    />
+  </div>
+</div>
+
+<!------------------------------------- newsletter --------------------------------------------------->
+<div class="my-24 p-24 mx-auto max-w-2xl bg-amber-100 height-400 text-center">
+  <p>
+    Are you a fashion enthusiats, or do you want to
+    <strong><em>become a model</em></strong> ? Subscribe to our newsletter to
+    stay updated.
+  </p>
+  <form method="POST" class="flex my-4 items-center justify-center">
+    {% csrf_token %}
+
+    <input
+      class="p-4 w-full rounded-none border border-slate-400 focus:outline-none"
+      id="email"
+      type="email"
+      name="email"
+      placeholder="Email"
+      required="true"
+    />
+    <button
+      type="submit"
+      class="bg-black text-white active:bg-slate-900 text-sm font-bold uppercase py-5 px-12 rounded-none shadow hover:shadow-lg outline-none focus:outline-none"
+    >
+      Subscribe
+    </button>
+  </form>
+</div>
+
+{% endblock %}

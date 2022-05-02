@@ -1,0 +1,73 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<!-- hero section -->
+<div class="p-24 w-full bg-black h-80 text-center text-white">
+  <h1 class="text-7xl font-extrabold">FIMO</h1>
+  <p class="text-xl text-gray-300">228</p>
+</div>
+<!------------------------- intro --------------------------------------------------------------->
+<div class="items-center mx-auto text-right justify-center max-w-5xl">
+  <div class="my-24 grid grid-cols-2 gap-10">
+    <img
+      src="{% static 'images/brenda3.jpg' %}"
+      alt="carousel"
+      class="w-200 h-300 object-center object-cover"
+    />
+    <div>
+      <h1 class="my-12 font-extrabold text-4xl">Bonjour!</h1>
+      <p class="my-12 mx-auto font-semibold text-lg">
+        Manifestation en pleine croissance, le "FIMO228", le Festival
+        International de la Mode au Togo, est devenu une référence dans le
+        calendrier des grandes rencontres africaines. Fortement sollicité par
+        les acteurs de la mode, non seulement du Togo, mais de plusieurs pays
+        d'Afrique et désormais d'Europe et de l'Amérique, le FIMO228 est devenu
+        un évènement incontournable. Un accent particulier est mis sur
+        l'employabilité et la promotion des jeunes. le FIMO228 est également une
+        plate-forme d'échanges et d'opportunités, de promotion de l'artisanat
+        africain en général et togolais en particulier.
+      </p>
+
+      <div class="flex flex-auto space-x-4 justify-end">
+        <a
+          class="inline-block p-3 title font-medium tracking-wider bg-black text-white rounded-none"
+          href="#"
+          >Read more
+        </a>
+        <a
+          class="inline-block p-3 title font-medium tracking-wider border border-grey-200 text-black hover:bg-amber-100 rounded-none"
+          href="#"
+          >Explore
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------- newsletter --------------------------------------------------->
+<div class="my-24 p-24 mx-auto max-w-2xl bg-amber-100 height-400 text-center">
+  <p>
+    Are you a fashion enthusiats, or do you want to
+    <strong><em>become a model</em></strong> ? Subscribe to our newsletter to
+    stay updated.
+  </p>
+  <form method="POST" class="flex my-4 items-center justify-center">
+    {% csrf_token %}
+
+    <input
+      class="p-4 w-full rounded-none border border-slate-400 focus:outline-none"
+      id="email"
+      type="email"
+      name="email"
+      placeholder="Email"
+      required="true"
+    />
+    <button
+      type="submit"
+      class="bg-black text-white active:bg-slate-900 text-sm font-bold uppercase py-5 px-12 rounded-none shadow hover:shadow-lg outline-none focus:outline-none"
+    >
+      Subscribe
+    </button>
+  </form>
+</div>
+
+{% endblock %}

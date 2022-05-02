@@ -1,0 +1,52 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<div class="p-24 w-full bg-black h-80 text-center text-white ">
+  <h1 class="text-7xl font-extrabold">FIMO228</h1>
+  <p class="text-xl text-gray-300">Designers</p>
+</div>
+
+<div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+
+  <div
+    class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8"
+  >
+    {% for designer in designers %}
+    <div class="shadow-md rounded-none overflow-hidden block">
+      <div
+        class="w-full aspect-w-1 aspect-h-1 overflow-hidden xl:aspect-w-7 xl:aspect-h-8"
+      >
+      <a href="{% url 'designer-detail' designer.slug %}">
+          <img
+            src="{{ designer.thumbnail.url }}"
+            alt="{{ designer.name }}"
+            class="w-300 h-300 object-center object-cover group-hover:opacity-75 m-0"
+          />
+        </a>
+      </div>
+      <div class="m-4">
+        <h3 class="mt-2 text-md text-gray-700">{{designer.name}}</h3>
+        <p class="my-2 text-lg font-medium text-gray-900">
+          {{designer.biography}}
+        </p>
+        <div class="flex flex-auto space-x-4">
+          <a
+  class="inline-block p-3 title font-medium tracking-wider bg-black text-white rounded-none"
+  href="#"
+  >Contact </a
+>
+          <a
+  class="inline-block p-3 title font-medium tracking-wider border border-grey-200 text-slate-900 rounded-none"
+  href="#"
+  >See more &rarr; </a
+>
+        
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+  </div>
+</div>
+ {% endblock %}

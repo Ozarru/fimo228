@@ -1,0 +1,73 @@
+{% extends "main.html" %}
+<!--  -->
+{% load static %}
+<!--  -->
+{% block content %}
+<div class="bg-white">
+  <div class="p-8 group rounded-none">
+    <div class="flex justify-between">
+      <a
+        class="inline-block mt-4 p-3 title font-medium tracking-wider border border-grey-400 text-black rounded-none"
+        href="{% url 'home' %}"
+        >&larr; Back to shop
+      </a>
+      <a
+        class="inline-block mt-4 p-3 title font-medium tracking-wider bg-red-700 text-white rounded-none"
+        href="#"
+        >Clear cart
+      </a>
+    </div>
+    <div
+      class="mt-4 grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:gap-x-8 justify-center align-middle"
+    >
+      <h3>N° of orders: <strong> ... </strong></h3>
+      <h3>Total: <strong> $ ...</strong></h3>
+      <a
+        class="inline-block p-4 title font-medium tracking-wider bg-green-700 text-white rounded-none"
+        href="{% url 'checkout' %}"
+        >Checkout &rarr;</a
+      >
+    </div>
+  </div>
+  <div class="m-4 px-8 py-4 group shadow-sm rounded-none">
+    <div class="my-2 grid grid-cols-5 gap-6 font-bold text-slate-900">
+      <h4>Image</h4>
+      <h4>Name</h4>
+      <h4>Price</h4>
+      <h4>Quantity</h4>
+      <h4>Total</h4>
+    </div>
+    <div class="mt-6 grid grid-cols-5 gap-6 justify-center align-middle">
+      {% for product in products %}
+
+      <img
+        class="h-6 text-gray-200"
+        src="{{product.thumbnail.url}}"
+        alt="product image"
+      />
+      <p>{{product.name}}</p>
+      <p>${{product.price|floatformat:2}}</p>
+      <p class="grid grid-cols-3">
+        <img
+          data-product="{{product.product.id}}"
+          data-action="remove"
+          class="h-6 text-gray-200 update-cart"
+          src="{% static 'images/assets/down.png' %}"
+          alt="decrease button"
+        />
+        {{product.quantity}}
+        <img
+          data-product="{{product.product.id}}"
+          data-action="add"
+          class="h-6 text-gray-200 update-cart"
+          src="{% static 'images/assets/up.png' %}"
+          alt="increase button"
+        />
+      </p>
+      <p>{{product.quantity}}</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
