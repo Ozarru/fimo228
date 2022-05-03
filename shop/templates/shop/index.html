@@ -13,8 +13,23 @@
     <p class="text-xl text-gray-300">Boutique</p>
   </div>
 <!-- rendered products -->
-<div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+<div class="max-w-7xl mx-auto py-16 px-4 lg:px-8">
 
+
+  <!-- quick search -->
+  <div class="max-w-4xl mx-auto mb-16 p-8 shadow-lg flex flex-auto gap-4 justify-between">
+    <form  action="{% url 'products' %}" method="get">
+      <input class="p-2 border border-gray-300 outline-dashed" type="text" name="query" placeholder="Recherchez...">
+    </form>
+    <a class="py-2 px-6 uppercase font-medium border border-gray-200 bg-gray-100"
+    href="{% url 'products' %}">All</a>
+    {% for couture in coutures %}
+    <a class="py-2 px-6 uppercase font-medium border border-gray-200 bg-gray-100"
+    href="{% url 'products' %}?query={{couture.name}}">{{couture.name}}</a>
+    {% endfor %}
+  </div>
+
+  <!-- rendering products -->
   <div
     class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8"
   >
@@ -37,21 +52,21 @@
           {{product.price}} XOF
         </p>
         <div class="flex flex-auto space-x-4">
-          <a
+          <!-- <a
   class="inline-block p-3 title font-medium tracking-wider bg-black text-white rounded-none"
   href="{% url 'product-detail' product.slug %}"
   >Add to cart </a
->
-      <!-- <button
+> -->
+      <button
         data-product="{{product.id}}"
         data-action="add"
         class="flex-none w-1/2 h-12 title font-small tracking-wider bg-black text-white rounded-none update-cart"
         type="button"
       >
       Add to cart
-      </button> -->
+      </button>
           <a
-  class="inline-block p-3 title font-medium tracking-wider border border-grey-300 text-gray-900 bg-white hover:bg-amber-100 rounded-none"
+  class="inline-block p-3 title font-medium tracking-wider border border-grey-300 text-gray-900 bg-white rounded-none"
   href="{% url 'product-detail' product.slug %}"
   >View &rarr; </a
 >

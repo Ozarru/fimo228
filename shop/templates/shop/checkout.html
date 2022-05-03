@@ -5,24 +5,24 @@
 <div class="bg-white p-8 mx-auto max-w-7xl">
   <div class="p-4 group shadow-sm rounded-none">
     <a
-      class="inline-block p-4 title font-medium tracking-wider border border-sky-200 text-sky-700 rounded-md"
+      class="inline-block mt-4 p-3 title font-medium tracking-wider border border-grey-400 rounded-none"
       href="{% url 'cart' %}"
-      >&larr; Back to cart</a
+      >&larr; Panier</a
     >
-    <h2 class="mt-4 font-bold text-sky-700 text-xl">Order summary</h2>
+    <h2 class="mt-4 font-bold text-xl">Résumé d'achat</h2>
     <div
       class="mt-4 grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:gap-x-8 justify-center align-middle"
     ></div>
   </div>
   <div class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6">
-    <div class="mt-4 p-4 group shadow-sm rounded-none">
+    <div class="mt-4 p-4 group shadow-md rounded-none">
       <div
-        class="mt-4 grid grid-cols-5 gap-y-10 sm:gap-x-6 xl:gap-x-8 justify-center align-middle font-bold text-sky-700"
+        class="mt-4 grid grid-cols-5 gap-y-10 sm:gap-x-6 xl:gap-x-8 justify-center align-middle font-bold"
       >
         <h4>Image</h4>
-        <h4>Name</h4>
-        <h4>Price</h4>
-        <h4>Quantity</h4>
+        <h4>Nom</h4>
+        <h4>Prix</h4>
+        <h4>Quantité</h4>
         <h4>Total</h4>
       </div>
       <div
@@ -32,28 +32,43 @@
 
         <img
           class="h-6 text-gray-200"
-          src="{% static 'images/sub.jpg' %}"
+          src="{{item.product.thumbnail.url}}"
           alt="Item image"
         />
         <p>{{item.product.name}}</p>
-        <p>${{item.product.price}}</p>
+        <p>{{item.product.price}} XOF</p>
         <p>{{item.quantity}}</p>
-        <p>${{item.get_total}}</p>
+        <p>{{item.get_total}} XOF</p>
         {% endfor %}
       </div>
     </div>
     <div class="font-bold">
-      <div class="mt-4 p-4 shadow-sm rounded-none">
-        <h3 class="mb-4 text-gray-700">
-          N° of Items: {{order.get_cart_items}}
-        </h3>
-        <h3 class="mb-4 text-gray-700">
-          Sub Total: ${{order.get_cart_total|floatformat:2}}
-        </h3>
-        <h3 class="mb-4 text-gray-700">Tax (VAT 18%): $</h3>
-        <h3 class="mb-4 text-gray-700">Grand Total: $</h3>
+      <div class="mt-4 p-4 shadow-md rounded-none">
+        <div class="flex justify-between">
+          <h3 class="mb-4 text-gray-700">N° of Items:</h3>
+          <h3 class="mb-4 text-gray-700">{{order.get_cart_items}}</h3>
+        </div>
+        <div class="flex justify-between">
+          <h3 class="mb-4 text-gray-700">Sub Total:</h3>
+          <h3 class="mb-4 text-gray-700">
+            {{order.get_cart_total|floatformat:2}} XOF
+          </h3>
+        </div>
+        <div class="flex justify-between">
+          <h3 class="mb-4 text-gray-700">Tax (VAT 18%):</h3>
+          <h3 class="mb-4 text-gray-700">XOF</h3>
+        </div>
+        <div class="flex justify-between">
+          <h3 class="mb-4 text-gray-700">Grand Total:</h3>
+          <h3 class="mb-4 text-gray-700">
+            {{order.get_cart_total|floatformat:2}} XOF
+          </h3>
+        </div>
+
+        <!-- <h3 class="mb-4 text-gray-700">Tax (VAT 18%): $</h3> -->
       </div>
-      <div class="mt-4 p-4 shadow-sm rounded-none">
+      <!-- shippnig info form -->
+      <div class="mt-4 p-4 shadow-md rounded-none">
         <h2 class="mb-4 font-bold text-gray-700 text-xl">Shipping Info</h2>
         <form
           action=""
@@ -61,32 +76,32 @@
           class="grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           <input
-            class="p-2 border border-sky-200 rounded-md"
+            class="p-2 border border-gray-200"
             type="text"
             placeholder="Phone..."
           />
           <input
-            class="p-2 border border-sky-200 rounded-md"
+            class="p-2 border border-gray-200"
             type="text"
             placeholder="Address..."
           />
           <input
-            class="p-2 border border-sky-200 rounded-md"
+            class="p-2 border border-gray-200"
             type="text"
             placeholder="City..."
           />
           <input
-            class="p-2 border border-sky-200 rounded-md"
+            class="p-2 border border-gray-200"
             type="text"
             placeholder="State, Province or Region..."
           />
           <input
-            class="p-2 border border-sky-200 rounded-md"
+            class="p-2 border border-gray-200"
             type="text"
             placeholder="Payment Method..."
           />
           <button
-            class="px-4 h-12 title font-medium tracking-wider bg-sky-700 text-white rounded-md"
+            class="px-4 h-12 title font-medium tracking-wider bg-gray-700 hover:bg-black text-white"
             type="submit"
           >
             Continue &rarr;

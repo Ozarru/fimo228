@@ -3,13 +3,13 @@
 {% load static %}
 <!--  -->
 {% block content %}
-<div class="bg-white">
+<div class="bg-white max-w-7xl mx-auto">
   <div class="p-8 group rounded-none">
     <div class="flex justify-between">
       <a
         class="inline-block mt-4 p-3 title font-medium tracking-wider border border-grey-400 text-black rounded-none"
-        href="{% url 'home' %}"
-        >&larr; Back to shop
+        href="{% url 'products' %}"
+        >&larr; Boutique
       </a>
       <a
         class="inline-block mt-4 p-3 title font-medium tracking-wider bg-red-700 text-white rounded-none"
@@ -17,11 +17,9 @@
         >Clear cart
       </a>
     </div>
-    <div
-      class="mt-4 grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:gap-x-8 justify-center align-middle"
-    >
-      <h3>N° of orders: <strong> ... </strong></h3>
-      <h3>Total: <strong> $ ...</strong></h3>
+    <div class="mt-4 flex justify-between">
+      <h3>N° of orders: <strong> {{order.get_cart_items}} </strong></h3>
+      <h3>Total: <strong> {{order.get_cart_total}} XOF</strong></h3>
       <a
         class="inline-block p-4 title font-medium tracking-wider bg-green-700 text-white rounded-none"
         href="{% url 'checkout' %}"
@@ -38,33 +36,33 @@
       <h4>Total</h4>
     </div>
     <div class="mt-6 grid grid-cols-5 gap-6 justify-center align-middle">
-      {% for product in products %}
+      {% for item in cart_items %}
 
       <img
         class="h-6 text-gray-200"
-        src="{{product.thumbnail.url}}"
-        alt="product image"
+        src="{{item.product.thumbnail.url}}"
+        alt="item image"
       />
-      <p>{{product.name}}</p>
-      <p>${{product.price|floatformat:2}}</p>
-      <p class="grid grid-cols-3">
+      <p>{{item.product.name}}</p>
+      <p>{{item.product.price|floatformat:2}} XOF</p>
+      <p class="flex">
         <img
-          data-product="{{product.product.id}}"
+          data-product="{{item.item.id}}"
           data-action="remove"
-          class="h-6 text-gray-200 update-cart"
-          src="{% static 'images/assets/down.png' %}"
+          class="h-6 text-gray-200 update-cart mr-2"
+          src="{% static 'icons/down.png' %}"
           alt="decrease button"
         />
-        {{product.quantity}}
+        {{item.quantity}}
         <img
-          data-product="{{product.product.id}}"
+          data-item="{{item.item.id}}"
           data-action="add"
-          class="h-6 text-gray-200 update-cart"
-          src="{% static 'images/assets/up.png' %}"
+          class="h-6 text-gray-200 update-cart ml-2"
+          src="{% static 'icons/up.png' %}"
           alt="increase button"
         />
       </p>
-      <p>{{product.quantity}}</p>
+      <p>{{item.get_total}} XOF</p>
       {% endfor %}
     </div>
   </div>

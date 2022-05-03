@@ -11,8 +11,11 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{% static 'js/cart.js' %}" defer="true"></script>
 
     <script type="text/javascript">
+      var user = "{{ request.user }}";
+
       function getToken(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== "") {
