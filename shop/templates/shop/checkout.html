@@ -5,7 +5,7 @@
 <div class="bg-white p-8 mx-auto max-w-7xl">
   <div class="p-4 group shadow-sm rounded-none">
     <a
-      class="inline-block mt-4 p-3 title font-medium tracking-wider border border-grey-400 rounded-none"
+      class="inline-block mt-4 p-3 title font-medium tracking-wider border border-grey-400"
       href="{% url 'cart' %}"
       >&larr; Panier</a
     >
@@ -64,52 +64,145 @@
             {{order.get_cart_total|floatformat:2}} XOF
           </h3>
         </div>
-
-        <!-- <h3 class="mb-4 text-gray-700">Tax (VAT 18%): $</h3> -->
       </div>
       <!-- shippnig info form -->
-      <div class="mt-4 p-4 shadow-md rounded-none">
-        <h2 class="mb-4 font-bold text-gray-700 text-xl">Shipping Info</h2>
-        <form
-          action=""
-          method="POST"
-          class="grid grid-cols-1 sm:grid-cols-2 gap-4"
-        >
+      <div class="mt-4 p-4 shadow-md">
+        <form id="form" action="" method="POST">
+          <div id="user-info" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              class="p-2 border border-gray-200"
+              type="text"
+              placeholder="Name..."
+              required="true"
+              name="name"
+            />
+            <input
+              class="p-2 border border-gray-200"
+              type="email"
+              placeholder="Email..."
+              required="true"
+              name="email"
+            />
+          </div>
+          <h2 class="my-4 font-bold text-gray-700 text-xl">Shipping Info</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              class="p-2 border border-gray-200"
+              type="text"
+              placeholder="Phone..."
+              required="true"
+              name="phone"
+            />
+            <input
+              class="p-2 border border-gray-200"
+              type="text"
+              placeholder="Address..."
+              required="true"
+              name="address"
+            />
+            <input
+              class="p-2 border border-gray-200"
+              type="text"
+              placeholder="City..."
+              required="true"
+              name="city"
+            />
+            <input
+              class="p-2 border border-gray-200"
+              type="text"
+              placeholder="Country..."
+              required="true"
+              name="country"
+            />
+          </div>
           <input
-            class="p-2 border border-gray-200"
-            type="text"
-            placeholder="Phone..."
-          />
-          <input
-            class="p-2 border border-gray-200"
-            type="text"
-            placeholder="Address..."
-          />
-          <input
-            class="p-2 border border-gray-200"
-            type="text"
-            placeholder="City..."
-          />
-          <input
-            class="p-2 border border-gray-200"
-            type="text"
-            placeholder="State, Province or Region..."
-          />
-          <input
-            class="p-2 border border-gray-200"
-            type="text"
-            placeholder="Payment Method..."
-          />
-          <button
-            class="px-4 h-12 title font-medium tracking-wider bg-gray-700 hover:bg-black text-white"
+            id="form-button"
+            class="mt-4 px-4 h-12 w-full font-medium tracking-wider bg-green-700 hover:bg-black text-white"
             type="submit"
-          >
-            Continue &rarr;
-          </button>
+            value="Continue"
+          />
         </form>
+      </div>
+      <!-- payment info -->
+      <div id="payment-info" class="hidden mt-4 p-4 shadow-md">
+        <h2 class="mb-4 font-bold text-gray-700 text-xl">PayPal</h2>
+        <button
+          id="make-payment"
+          class="inline-block mt-4 p-3 title font-medium tracking-wider border border-grey-400"
+        >
+          Make Payment
+        </button>
       </div>
     </div>
   </div>
 </div>
+<script>
+  var total = "{{order.get_cart_total}}";
+  if (user != "AnonymousUser") {
+    document.getElementById("user-info").innerHTML = "";
+  }
+
+  var form = document.getElementById("form");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(),
+      console.log("Form submitted"),
+      document.getElementById("form-button").classList.add("hidden");
+    document.getElementById("payment-info").classList.remove("hidden");
+  });
+
+  document
+    .getElementById("make-payment")
+    .addEventListener("click", function (e) {
+      submitFormdata();
+    });
+
+  function submitFormdata() {
+    console.log("Payment button clicked");
+
+    var userFormData = {
+      name: null,
+      email: null,
+      total: total,
+    };
+
+    var shippingInfo = {
+      phone: null,
+      address: null,
+      city: null,
+      country: null,
+    };
+
+    if (user == "AnonymousUser") {
+      userFormData.name = form.name.value;
+      userFormData.email = form.email.value;
+    }
+
+    shippingInfo.phone = form.phone.value;
+    shippingInfo.address = form.address.value;
+    shippingInfo.city = form.city.value;
+    shippingInfo.country = form.country.value;
+
+    var url = "/shop/process_order/";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken,
+      },
+      body: JSON.stringify({ form: userFormData, shipping: shippingInfo }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("Success:", data);
+        alert("Transaction completed");
+        cart = {};
+        document.cookie = "cart" + JSON.stringify(cart) + ";domain=;path=/";
+        window.location.href = "{% url 'products' %}";
+      });
+  }
+</script>
 
 {% endblock %}

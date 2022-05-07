@@ -36,7 +36,7 @@
       <h4>Total</h4>
     </div>
     <div class="mt-6 grid grid-cols-5 gap-6 justify-center align-middle">
-      {% for item in cart_items %}
+      {% for item in items %}
 
       <img
         class="h-6 text-gray-200"
@@ -47,17 +47,17 @@
       <p>{{item.product.price|floatformat:2}} XOF</p>
       <p class="flex">
         <img
-          data-product="{{item.item.id}}"
+          data-product="{{item.product.id}}"
           data-action="remove"
-          class="h-6 text-gray-200 update-cart mr-2"
+          class="h-6 mr-4 update-cart cursor-pointer"
           src="{% static 'icons/down.png' %}"
           alt="decrease button"
         />
         {{item.quantity}}
         <img
-          data-item="{{item.item.id}}"
+          data-product="{{item.product.id}}"
           data-action="add"
-          class="h-6 text-gray-200 update-cart ml-2"
+          class="h-6 ml-4 update-cart cursor-pointer"
           src="{% static 'icons/up.png' %}"
           alt="increase button"
         />

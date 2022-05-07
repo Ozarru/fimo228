@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="{% static 'js/cart.js' %}" defer="true"></script>
+    <script src="{% static 'js/basket.js' %}" defer="true"></script>
 
     <script type="text/javascript">
       var user = "{{ request.user }}";
@@ -34,6 +34,27 @@
         return cookieValue;
       }
       const csrftoken = getToken("csrftoken");
+
+      function getCookie(name) {
+        var cookieArray = document.cookie.split(";");
+        for (var i = 0; i < cookieArray.length; i++) {
+          var cookiePair = cookieArray[i].split("=");
+
+          if (name == cookiePair[0].trim()) {
+            return decodeURIComponent(cookiePair[1]);
+          }
+        }
+        return null;
+      }
+
+      var cart = JSON.parse(getCookie("cart"));
+      if (cart == undefined) {
+        cart = {};
+        console.log("Cart was created");
+        document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+      }
+
+      console.log("Cart:", cart);
     </script>
 
     {% if title %}

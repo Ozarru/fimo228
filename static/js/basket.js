@@ -1,3 +1,5 @@
+console.log("js is needed");
+
 var updateBtns = document.getElementsByClassName("update-cart");
 
 for (var i = 0; i < updateBtns.length; i++) {
@@ -8,17 +10,40 @@ for (var i = 0; i < updateBtns.length; i++) {
 
     console.log("User :", user);
     if (user == "AnonymousUser") {
-      console.log("User not authenticated");
+      addCookieItem(productId, action);
     } else {
       updateUserOrder(productId, action);
     }
   });
 }
 
+function addCookieItem(productId, action) {
+  console.log("Not logged in...");
+
+  if (action == "add") {
+    if (cart[productId] == undefined) {
+      cart[productId] = { quantity: 1 };
+    } else {
+      cart[productId]["quantity"] += 1;
+    }
+  }
+
+  if (action == "remove") {
+    cart[productId]["quantity"] -= 1;
+
+    if (cart[productId]["quantity"] <= 0) {
+      console.log("Remove item");
+      delete cart[productId];
+    }
+  }
+  console.log("Cart:", cart);
+  document.cookie = "cart=" + JSON.stringify(cart) + ";domain=;path=/";
+}
+
 function updateUserOrder(productId, action) {
   console.log("User is logged in, sending data...");
 
-  var url = "/update_item/";
+  var url = "/shop/update_item/";
 
   fetch(url, {
     method: "POST",

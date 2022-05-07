@@ -82,10 +82,10 @@ class ShippingInfo(models.Model):
     customer = models.ForeignKey(
         Customer, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-    country = models.CharField(max_length=64)
-    state = models.CharField(max_length=64)
-    city = models.CharField(max_length=64)
-    address = models.CharField(max_length=256)
+    phone = models.CharField(max_length=32, blank=False, null=False)
+    address = models.CharField(max_length=256, blank=False, null=False)
+    city = models.CharField(max_length=64, blank=False, null=False)
+    country = models.CharField(max_length=64, blank=False, null=False)
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

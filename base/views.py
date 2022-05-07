@@ -1,11 +1,17 @@
 from django.shortcuts import render
 
+from shop.utils import cartData
+
 
 def home(req):
-    context = {"title": 'home'}
+    data = cartData(req)
+    cartItems = data['cartItems']
+    context = {"title": 'acceuill', 'cartItems': cartItems}
     return render(req, 'base/index.html', context)
 
 
 def agency(req):
-    context = {"title": 'agency'}
+    data = cartData(req)
+    cartItems = data['cartItems']
+    context = {"title": 'agence', 'cartItems': cartItems}
     return render(req, 'base/agency.html', context)

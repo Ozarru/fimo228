@@ -28,11 +28,14 @@
         </h3>
         <p><em>{{product.description | title}}</em></p>
         <div class="grid grid-cols-2 gap-4">
-          <a
-            class="inline-block mt-4 p-3 title font-medium tracking-wider bg-black text-white rounded-none"
-            href="#"
-            >Add to cart
-          </a>
+          <button
+          data-product="{{product.id}}"
+          data-action="add"
+          class="inline-block mt-4 p-3 title font-medium tracking-wider bg-gray-800 hover:bg-black text-white update-cart"
+          type="button"
+        >
+        Add to cart
+        </button>
           <a
             class="inline-block mt-4 p-3 title font-medium tracking-wider bg-green-700 text-white rounded-none"
             href="#"

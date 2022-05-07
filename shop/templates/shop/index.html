@@ -60,17 +60,15 @@
       <button
         data-product="{{product.id}}"
         data-action="add"
-        class="flex-none w-1/2 h-12 title font-small tracking-wider bg-black text-white rounded-none update-cart"
+        class="flex-none w-1/2 h-12 title font-small tracking-wider bg-gray-800 hover:bg-black text-white update-cart"
         type="button"
       >
       Add to cart
       </button>
           <a
-  class="inline-block p-3 title font-medium tracking-wider border border-grey-300 text-gray-900 bg-white rounded-none"
+  class="inline-block p-3 title font-medium tracking-wider border border-grey-300 text-gray-900 bg-white"
   href="{% url 'product-detail' product.slug %}"
-  >View &rarr; </a
->
-        
+  >View &rarr; </a>
 
         </div>
       </div>

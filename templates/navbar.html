@@ -48,7 +48,7 @@
         class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
       >
         <!-- Profile dropdown -->
-        {% if False %}
+        {% if user.is_authenticated %}
 
         <a
           href="{% url 'home' %}"
@@ -59,7 +59,6 @@
           >Deconnexion</a
         >
         {% else %}
-
         <a
           href="{% url 'home' %}"
           class="block px-4 py-2 text-sm font-medium tracking-wider bg-white hover:bg-amber-100 text-slate-900"
@@ -69,10 +68,12 @@
           >Connexion</a
         >
         {% endif %}
-
-        <a href="{% url 'cart' %}">
+        <a href="{% url 'cart' %}" class="ml-4">
+          <small class="absolute ml-3 mt-3 text-red-700 font-black z-30"
+            >{{cartItems}}</small
+          >
           <img
-            class="h-6 text-gray-200 ml-4"
+            class="h-8 relative"
             src="{% static 'icons/bag.png' %}"
             alt="cart"
           />
