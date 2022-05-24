@@ -42,8 +42,15 @@ def products(req):
     return render(req, 'shop/index.html', context)
 
 
-def factos(req):
-    return render(req, 'shop/factos.html')
+def orders(req):
+    data = cartData(req)
+    cartItems = data['cartItems']
+
+    # products = Product.objects.all()
+    # query = req.GET.get('query') if req.GET.get('query') != None else ''
+    orders = Order.objects.all()
+    context = {'orders': orders, 'cartItems': cartItems, 'title': 'orders'}
+    return render(req, 'shop/orders.html', context)
 
 
 def cart(req):
@@ -83,18 +90,22 @@ def updateItem(req):
         order=order, product=product)
 
     if action == 'add':
-        orderItem.quantity = (orderItem.quantity + 1)
-        return JsonResponse('Item was increased by 1', safe=False)
+        orderItem.quantity += 1
     elif action == 'remove':
-        orderItem.quantity = (orderItem.quantity - 1)
-        return JsonResponse('Item was decreased by 1', safe=False)
+        orderItem.quantity -= 1
 
     orderItem.save()
 
     if orderItem.quantity <= 0:
         orderItem.delete()
-        return JsonResponse('Item was cleared from cart', safe=False)
-    # return JsonResponse('Item was added', safe=False)
+
+    return JsonResponse('Item was added or removed', safe=False)
+
+
+def clearCart(cart):
+    for items in cart:
+        items.delete()
+        print('cart cleared')
 
 
 def processOrder(req):

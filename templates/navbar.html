@@ -1,79 +1,135 @@
 {% load static %}
-<nav class="bg-black text-slate-200">
-  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-    <div class="relative flex items-center justify-between h-16">
-      <div
-        class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
-      >
-        <div class="flex-shrink-0 flex items-center">
-          <a href="{% url 'home' %}">
-            <img
-              class="hidden lg:block h-10 w-10"
-              src="{% static 'images/branding/logo.jpg' %}"
-              alt="FIMO228"
-            />
-          </a>
-        </div>
-        <div class="hidden sm:block sm:ml-6">
-          <div class="flex space-x-4">
-            <a
-              href="{% url 'home' %}"
-              class="hover:bg-slate-100 hover:text-black px-3 py-2 rounded-none text-sm font-medium"
-              >Acceuill</a
-            >
-            <a
-              href="{% url 'products' %}"
-              class="hover:bg-slate-100 hover:text-black px-3 py-2 rounded-none text-sm font-medium"
-              >Boutique</a
-            >
-            <a
-              href="{% url 'designers' %}"
-              class="hover:bg-slate-100 hover:text-black px-3 py-2 rounded-none text-sm font-medium"
-              >Designers</a
-            >
-            <a
-              href="{% url 'mannequins' %}"
-              class="hover:bg-slate-100 hover:text-black px-3 py-2 rounded-none text-sm font-medium"
-              >Mannequins</a
-            >
-            <a
-              href="{% url 'agency' %}"
-              class="hover:bg-slate-100 hover:text-black px-3 py-2 rounded-none text-sm font-medium"
-              >Agence</a
-            >
-          </div>
-        </div>
-      </div>
-      <div
-        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-      >
-        <!-- Profile dropdown -->
-        {% if user.is_authenticated %}
+<nav class="bg-black text-gray-100 py-4">
+  <div class="max-w-7xl mx-auto px-8 lg:flex lg:items-center justify-between">
+    <div class="flex items-center justify-between">
+      <a href="{% url 'home' %}">
+        <img
+          class="h-12 lg:block lg:h-16"
+          src="{% static 'images/branding/logo.jpg' %}"
+          alt="FIMO228"
+        />
+      </a>
+      <span class="text-3xl cursor-pointer lg:hidden">
+        <ion-icon name="menu" onclick="toggleMenu(this)"></ion-icon>
+      </span>
+    </div>
+    <div class="hidden mt-8 lg:flex lg:mt-2" id="navlinks">
+      <ul class="flex flex-col lg:flex-row gap-4 justify-between menu-list">
+        <a
+          href="{% url 'home' %}"
+          class="hover:bg-white hover:text-black px-3 py-2 my-2 w-full text-lg md:text-sm font-medium"
+          >Acceuill</a
+        >
+        <a
+          href="{% url 'products' %}"
+          class="hover:bg-white hover:text-black px-3 py-2 my-2 w-full text-lg md:text-sm font-medium"
+          >Boutique</a
+        >
+        <a
+          href="{% url 'designers' %}"
+          class="hover:bg-white hover:text-black px-3 py-2 my-2 w-full text-lg md:text-sm font-medium"
+          >Designers</a
+        >
+        <a
+          href="{% url 'mannequins' %}"
+          class="hover:bg-white hover:text-black px-3 py-2 my-2 w-full text-lg md:text-sm font-medium"
+          >Mannequins</a
+        >
+        <a
+          href="{% url 'agency' %}"
+          class="hover:bg-white hover:text-black px-3 py-2 my-2 w-full text-lg md:text-sm font-medium"
+          >Agence</a
+        >
+        <a
+          href="{% url 'orders' %}"
+          class="hover:bg-white hover:text-black px-3 py-2 my-2 w-full text-lg md:text-sm font-medium"
+          >Orders</a
+        >
+      </ul>
+      <div class="lg:flex justify-evenly">
+        <div class="mb-2 lg:ml-4">
+          {% if user.is_authenticated %}
 
-        <a
-          href="{% url 'home' %}"
-          class="block px-4 py-2 text-sm font-medium tracking-wider bg-white hover:bg-amber-100 text-slate-900"
-          role="menuitem"
-          tabindex="-1"
-          id="user-menu-item-2"
-          >Deconnexion</a
-        >
-        {% else %}
-        <a
-          href="{% url 'home' %}"
-          class="block px-4 py-2 text-sm font-medium tracking-wider bg-white hover:bg-amber-100 text-slate-900"
-          role="menuitem"
-          tabindex="-1"
-          id="user-menu-item-2"
-          >Connexion</a
-        >
-        {% endif %}
-        <a href="{% url 'cart' %}" class="ml-4">
-          <small class="absolute ml-3 mt-3 text-red-700 font-black z-30"
+          <div class="mt-2 relative">
+            <div>
+              <button
+                type="button"
+                class="bg-gray-800 flex text-sm rounded-full"
+                name="dropdownBtn"
+                id="dropdownBtn"
+                aria-expanded="false"
+                aria-haspopup="true"
+                onclick="toggleDropdown(this)"
+              >
+                <span class="sr-only">Open user menu</span>
+                <img
+                  class="h-8 rounded-full"
+                  src="{% static 'icons/default.jpg' %}"
+                  alt=""
+                />
+              </button>
+            </div>
+
+            <div
+              class="hidden absolute left-0 origin-top-left my-2 w-36 shadow-lg bg-white z-30"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="user-menu-button"
+              tabindex="-1"
+              id="dropdownMenu"
+            >
+              <a
+                href="{% url 'orders' %}"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-black hover:text-white"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-0"
+                >Mes Commandes</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-black hover:text-white"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-0"
+                >Mon Profile</a
+              >
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-black hover:text-white"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-1"
+                >Parametres</a
+              >
+              <a
+                href="{% url 'home' %}"
+                class="block px-4 py-2 text-sm font-bold tracking-wider bg-white text-slate-900 hover:bg-black hover:text-white"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-2"
+                >Deconnexion</a
+              >
+            </div>
+          </div>
+
+          {% else %}
+          <a
+            href="{% url 'home' %}"
+            class="block px-4 py-2 my-2 text-sm font-medium tracking-wider bg-white text-slate-900"
+            role="menuitem"
+            tabindex="-1"
+            id="user-menu-item-2"
+            >Connexion</a
+          >
+          {% endif %}
+        </div>
+        <a href="{% url 'cart' %}" class="lg:ml-4 lg:my-2">
+          <small class="absolute ml-3 mt-3 text-red-500 font-black z-20"
             >{{cartItems}}</small
           >
           <img
-            class="h-8 relative"
+            class="h-8 relative z-10"
             src="{% static 'icons/bag.png' %}"
             alt="cart"
           />
@@ -82,3 +138,17 @@
     </div>
   </div>
 </nav>
+
+<script>
+  function toggleMenu(e) {
+    e.name === "menu"
+      ? ((e.name = "close"), navlinks.classList.remove("hidden"))
+      : ((e.name = "menu"), navlinks.classList.add("hidden"));
+  }
+
+  function toggleDropdown(e) {
+    e.name === "dropdownBtn"
+      ? ((e.name = "close"), dropdownMenu.classList.remove("hidden"))
+      : ((e.name = "dropdownBtn"), dropdownMenu.classList.add("hidden"));
+  }
+</script>

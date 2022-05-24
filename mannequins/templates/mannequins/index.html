@@ -1,9 +1,9 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 <div class="p-24 w-full bg-black h-80 text-center text-white ">
-  <h1 class="text-7xl font-extrabold">FIMO228</h1>
-  <p class="text-xl text-gray-300">Mannequins</p>
+  <h1 class="text-5xl font-extrabold lg:font-black lg:text-7xl">FIMO228</h1>
+  <p class="mt-4 text-xl text-gray-300">Mannequins</p>
 </div>
-<div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+<div class="max-w-7xl mx-auto py-16 px-8 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
 
   <div
     class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8"
@@ -30,12 +30,12 @@
           <a
   class="inline-block p-3 title font-medium tracking-wider bg-black text-white rounded-none"
   href="#"
-  >Contact </a
+  >Contactez </a
 >
           <a
   class="inline-block p-3 title font-medium tracking-wider border border-grey-200 text-slate-900 rounded-none"
-  href="#"
-  >See more &rarr; </a
+  href="{% url 'mannequin-detail' mannequin.slug %}"
+  >Voir plus &rarr; </a
 >
         
 

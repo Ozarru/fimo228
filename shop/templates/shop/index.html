@@ -8,33 +8,38 @@
   class="w-full h-200 object-center object-contain m-0"
   /> -->
 
-  <div class="p-24 w-full bg-black h-80 text-center text-white ">
-    <h1 class="text-7xl font-extrabold">FIMO228</h1>
-    <p class="text-xl text-gray-300">Boutique</p>
+  <div class="py-24 w-full bg-black h-80 text-center text-white ">
+    <h1 class="text-5xl font-extrabold lg:font-black lg:text-7xl">FIMO228</h1>
+    <p class="mt-4 text-xl text-gray-300">La Boutique</p>
   </div>
 <!-- rendered products -->
-<div class="max-w-7xl mx-auto py-16 px-4 lg:px-8">
+<div class="max-w-7xl mx-auto py-16 px-8 lg:px-8">
 
+  <div class="max-w-xl mb-4 mx-auto">
 
-  <!-- quick search -->
-  <div class="max-w-4xl mx-auto mb-16 p-8 shadow-lg flex flex-auto gap-4 justify-between">
     <form  action="{% url 'products' %}" method="get">
-      <input class="p-2 border border-gray-300 outline-dashed" type="text" name="query" placeholder="Recherchez...">
+      <input class="p-2 border border-gray-300  w-full" type="text" name="query" placeholder="Recherchez...">
     </form>
-    <a class="py-2 px-6 uppercase font-medium border border-gray-200 bg-gray-100"
-    href="{% url 'products' %}">All</a>
-    {% for couture in coutures %}
-    <a class="py-2 px-6 uppercase font-medium border border-gray-200 bg-gray-100"
-    href="{% url 'products' %}?query={{couture.name}}">{{couture.name}}</a>
-    {% endfor %}
+  </div>
+  <!-- quick search -->
+  <div class="max-w-xl mx-auto mb-16 p-8 shadow-lg flex flex-col md:flex-row gap-4 justify-between">
+    
+      <a class="py-2 px-6 uppercase font-medium bg-black text-white"
+      href="{% url 'products' %}">All</a>
+
+      {% for couture in coutures %}
+      <a class="py-2 px-6 uppercase font-medium border border-gray-200 bg-gray-50"
+      href="{% url 'products' %}?query={{couture.name}}">{{couture.name}}</a>
+      {% endfor %}
+
   </div>
 
   <!-- rendering products -->
   <div
-    class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8"
+    class="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-6"
   >
     {% for product in products %}
-    <div class="bg-gray-100 shadow-md rounded-none overflow-hidden block">
+    <div class="shadow-md rounded-none overflow-hidden block">
       <div
         class="w-full aspect-w-1 aspect-h-1 overflow-hidden xl:aspect-w-7 xl:aspect-h-8"
       >
@@ -52,23 +57,31 @@
           {{product.price}} XOF
         </p>
         <div class="flex flex-auto space-x-4">
-          <!-- <a
-  class="inline-block p-3 title font-medium tracking-wider bg-black text-white rounded-none"
-  href="{% url 'product-detail' product.slug %}"
-  >Add to cart </a
-> -->
       <button
         data-product="{{product.id}}"
         data-action="add"
-        class="flex-none w-1/2 h-12 title font-small tracking-wider bg-gray-800 hover:bg-black text-white update-cart"
+        class="flex-none px-6 h-12 md:px-11 title font-small tracking-wider bg-gray-900 hover:bg-black text-white update-cart"
         type="button"
       >
-      Add to cart
+      <img class="h-6" src="{% static 'icons/bag+.png' %}" alt="">
       </button>
           <a
   class="inline-block p-3 title font-medium tracking-wider border border-grey-300 text-gray-900 bg-white"
   href="{% url 'product-detail' product.slug %}"
-  >View &rarr; </a>
+  >Voir </a>
+  <button
+  class="flex-none flex items-center justify-center w-12 h-12 text-gray-200 border border-gray-200"
+  type="button"
+  aria-label="Like"
+>
+  <svg width="20" height="20" fill="currentColor" aria-hidden="true">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+    />
+  </svg>
+</button>
 
         </div>
       </div>

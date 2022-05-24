@@ -1,0 +1,59 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<!-- hero section -->
+
+<!-- <img
+  src="{% static 'images/branding/fimoshop.jpg' %}"
+  alt="carousel"
+  class="w-full h-200 object-center object-contain m-0"
+  /> -->
+
+  <div class="py-24 w-full bg-black h-80 text-center text-white ">
+    <h1 class="text-5xl font-extrabold lg:font-black lg:text-7xl">FIMO228</h1>
+    <p class="mt-4 text-xl text-gray-300">La mode a votre portée.</p>
+  </div>
+<!-- rendered orders -->
+<div class="max-w-7xl mx-auto py-16 px-8 lg:px-8">
+
+    <!-- quick search -->
+  <div class="max-w-xl mb-4 mx-auto">
+
+    <form  action="{% url 'orders' %}" method="get">
+      <input class="p-2 border border-gray-300  w-full" type="text" name="query" placeholder="Recherchez...">
+    </form>
+  </div>
+
+
+  <!-- rendering orders -->
+  <div
+    class="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-6"
+  >
+    {% for order in orders %}
+    <div class="shadow-md rounded-none overflow-hidden block">
+      <div class="m-4">
+        <h3 class="mt-2 text-md text-gray-700">Order ID: {{order.id}}</h3>
+        <p class="my-2 text-lg font-medium text-gray-900">
+          {{order.total}} 15.000 XOF
+        </p>
+        <div class="flex flex-auto space-x-4">
+      <button
+        data-order="{{order.id}}"
+        data-action="add"
+        class="flex-none px-6 h-12 md:px-11 title font-small tracking-wider bg-red-900 hover:bg-red-700 text-white update-cart"
+        type="button"
+      >Annuler
+      </button>
+          <a
+  class="inline-block p-3 title font-medium tracking-wider border border-grey-300 text-gray-900 bg-white"
+  href="#"
+  >Voir </a>
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+  </div>
+</div>
+ {% endblock %}

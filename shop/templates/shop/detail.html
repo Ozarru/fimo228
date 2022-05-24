@@ -34,12 +34,14 @@
           class="inline-block mt-4 p-3 title font-medium tracking-wider bg-gray-800 hover:bg-black text-white update-cart"
           type="button"
         >
-        Add to cart
+        Ajoutez au panier
         </button>
           <a
-            class="inline-block mt-4 p-3 title font-medium tracking-wider bg-green-700 text-white rounded-none"
-            href="#"
-            >Buy now
+          data-product="{{product.id}}"
+          data-action="add"
+            class="inline-block text-center mt-4 p-3 title font-medium tracking-wider bg-pink-50 border border-pink-300 text-black"
+            href="{% url 'checkout' %}"
+            >Acheter maintenant
           </a>
         </div>
       </div>

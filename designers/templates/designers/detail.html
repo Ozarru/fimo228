@@ -1,11 +1,11 @@
 {% extends 'main.html' %} {% block content %}
 
-<div class="max-w-7xl px-24">
+<div class="max-w-7xl mx-auto px-8 md:px-24">
   <div class="mx-auto mt-4 justify-center w-full">
     <a
       class="inline-block mt-4 p-3 title font-medium tracking-wider border border-grey-400 text-black rounded-none"
       href="{% url 'designers' %}"
-      >&larr; Back
+      >&larr; Retour
     </a>
     <div class="mt-6 grid grid-cols-1 gap-10 sm:grid-cols-2">
       <div class="w-full h-full rounded-none overflow-hidden">
@@ -23,17 +23,28 @@
           {{designer.collection}} Collection
         </h3>
         <p><em>{{designer.biographie}}</em></p>
-        <div class="grid grid-cols-2 gap-4">
-          <a
-            class="inline-block mt-4 p-3 title font-medium tracking-wider bg-black text-white rounded-none"
-            href="#"
-            >Contact
-          </a>
-          <a
-            class="inline-block mt-4 p-3 title font-medium tracking-wider bg-green-700 text-white rounded-none"
-            href="#"
-            >See more
-          </a>
+
+        <a
+          class="inline-block mt-4 p-3 font-large tracking-wider bg-black text-white rounded-none"
+          href="#"
+          >Contactez
+        </a>
+
+        <div class="mt-4 text-4xl">
+          <ul>
+            <a href="https://web.facebook.com/FIMO228/" target="null"
+              ><i class="fab fa-facebook-square hover:text-blue-700"></i
+            ></a>
+            <a href="https://www.instagram.com/FIMO228/" target="null"
+              ><i class="fab fa-instagram hover:text-pink-600"></i
+            ></a>
+            <a href="https://www.linkedin.com/company/FIMO228" target="null"
+              ><i class="fab fa-linkedin hover:text-sky-700"></i
+            ></a>
+            <a href="https://www.linkedin.com/company/FIMO228" target="null"
+              ><i class="fab fa-twitter-square hover:text-sky-700"></i
+            ></a>
+          </ul>
         </div>
       </div>
 

@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\USER\Desktop\Python\Django projects\fimo228 main\fimo228\venv"
+VIRTUAL_ENV="C:\Users\USER\Desktop\Python\Django\fimo228 main\fimo228\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

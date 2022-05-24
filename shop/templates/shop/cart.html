@@ -11,20 +11,27 @@
         href="{% url 'products' %}"
         >&larr; Boutique
       </a>
-      <a
-        class="inline-block mt-4 p-3 title font-medium tracking-wider bg-red-700 text-white rounded-none"
-        href="#"
-        >Clear cart
-      </a>
+      <button
+        data-product="{{product.id}}"
+        data-action="clear"
+        class="inline-block mt-4 p-3 title font-medium tracking-wider bg-red-700 hover:bg-black text-white update-cart"
+        type="button"
+      >
+        Videz le panier
+      </button>
     </div>
     <div class="mt-4 flex justify-between">
-      <h3>N° of orders: <strong> {{order.get_cart_items}} </strong></h3>
+      <h3>N° d'articles: <strong> {{order.get_cart_items}} </strong></h3>
       <h3>Total: <strong> {{order.get_cart_total}} XOF</strong></h3>
       <a
-        class="inline-block p-4 title font-medium tracking-wider bg-green-700 text-white rounded-none"
+        class="flex p-4 title font-medium tracking-wider bg-green-700 text-white rounded-none"
         href="{% url 'checkout' %}"
-        >Checkout &rarr;</a
-      >
+        >Caisse
+        <img
+          class="h-6 ml-4"
+          src="{% static 'icons/checkout.png' %}"
+          alt="checkout button"
+      /></a>
     </div>
   </div>
   <div class="m-4 px-8 py-4 group shadow-sm rounded-none">
